@@ -1,28 +1,52 @@
 //API url
 const bookAPI = "https://openlibrary.org/search.json"
-const titleInput = document.querySelector('#title')
-const Btn = document.querySelector('#addBook')
+
+
 //search API
 async function fetchBookInfo() {
-    // let title = document.querySelector('#title').value
-    const response = await fetch(`https://openlibrary.org/search.json?q=${'#title.value'}`);
+    let title = document.querySelector('#title')
+    const response = await fetch(`https://openlibrary.org/search.json?title=${'title'}`);
     const bookInfo = await response.json();
     console.log(bookInfo);
   }
   fetchBookInfo()
-  //it was pulling info now its an empty array idk what I did ha
+  //fetching YAY
+  
+// Create book
+function bookDetails(title, author, isbn) {
+    this.title = title;
+    this.author = author;
+    this.isbn = isbn;
+}
+// Create an empty array to store the bookList
+    const bookList = [];
 
-  //create book
-// function bookDetails (title, author, isbn)
 
-//add book
+// Add a new book to the array when the "Add Book" button is clicked
+ document.getElementById('addBook').addEventListener('click', () => {
+  const book = document.getElementById('title').value;
+  bookList.push(book);
 
-//clear input
+  // Clear the input field
+//   document.getElementById('title').value = '';
 
-//delete book
+  // Update the Book List
+  addBookToList();
+});
 
-//event listeners
+// Update the Book List to display the current book
+function addBookToList(book) {
+  const list = document.getElementById('book-list');
+  const row = document.createElement('tr')
 
-// Btn.addEventListener('click', () => {
-//     fetchBookInfo();
-// })
+  row.innerHTML = `
+  <td>${book.title}</td>
+  <td>${book.author}</td>
+  <td>${book.isbn}</td>
+  <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
+ `;
+
+  // Create a new listed book for each book
+      
+  list.appendChild(row);
+}
