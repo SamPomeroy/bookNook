@@ -16,10 +16,17 @@
           book <i class="fas fa-book-open-reader text-info"></i> Nook</h1>
           <form id="book-form">
               <div class="form-group">
-                <!-- form div for book title at least -->
               <label for="title">Title</label>
               <input type="text" id="title" class="form-control">
             </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" id="author" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="isbn">ISBN#</label>
+                <input type="text" id="isbn" class="form-control">
+              </div>
             <!-- display API first_sentence ???-->
             <div class="quote"></div>
             <!-- search button -->
@@ -32,7 +39,7 @@
             <thead>
               <tr>
                 <th>Title</th>
-                
+                <!--display info from API-ISBN & Author???-->
                 <th id="listAuthor">Author</th>
                 <th id="listISBN">ISBN#</th>
                 <th></th>

@@ -2,12 +2,15 @@
 const bookAPI = "https://openlibrary.org/search.json"
 
 
-//search API
+//search API-change all to .then and try again
 async function fetchBookInfo() {
     let title = document.querySelector('#title')
     const response = await fetch(`https://openlibrary.org/search.json?title=${'title'}`);
     const bookInfo = await response.json();
     console.log(bookInfo);
+    
+    // document.querySelector('.quote').innerHTML = ${obj[0].docs.author_name} (cant find first sentence in every object)
+    
   }
   fetchBookInfo()
   //fetching YAY
