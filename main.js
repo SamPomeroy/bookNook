@@ -1,29 +1,21 @@
 //openLibraryAPI url = "https://openlibrary.org/search.json"
-//googleBooksAPI url ="https://books.google.com/books/previewlib.js"
-//googleBooks embedViewer = GBS_insertEmbeddedViewer(`ISBN:0738531367`,400,150)
-const isbnSearch = document.querySelector('#isbn')
 
-
-//search API-change all to .then and try again
+//search API & return first sentence (maybe add author and isbn)
 async function fetchBookInfo(title) {
     
     const response = await fetch(`https://openlibrary.org/search.json?title=${title}`);
     const bookInfo = await response.json();
+    // console.log(bookInfo.docs[0].isbn[0])
+    // console.log(bookInfo.docs[0].author_name[0])
     console.log(bookInfo.docs[0].first_sentence[0]);
     let newText = bookInfo.docs[0].first_sentence[0]
+    const quote = document.querySelector('.quote')
     let newQuote = document.createElement('p')
-    newQuote.innerHTML = newText
+    newQuote.innerHTML = `${newText} <td><a href="#" id="delete" class="btn btn-danger btn-sm delete">X</a></td>`
     quote.appendChild(newQuote)
-    
-    
+    //work on delete
+   //work on catch error 
   }
-//   const firstSentence = fetchBookInfo(title);
-//     console.log(firstSentence)
-//     let newQuote = document.createElement('p')
-//     newQuote.innerHTML = firstSentence
-//     quote.appendChild(newQuote)
-    
-        //
   
 // Create book
 function bookDetails(title, author, isbn) {
@@ -61,7 +53,13 @@ function displayBooks() {
       el.parentElement.parentElement.remove();
     }
   }
-
+//delete quote
+  function deleteQuote(el) {
+    if(el.classList.contains('delete')){
+        el.parentElement.parentElement.remove()
+    }
+  }
+//store books
   function getBooks() {
     let books;
     if(localStorage.getItem('books') === null) {
@@ -69,7 +67,6 @@ function displayBooks() {
     } else {
       books = JSON.parse(localStorage.getItem('books'));
     }
-
     return books;
   }
 
@@ -88,7 +85,6 @@ function displayBooks() {
     });
     localStorage.setItem('books', JSON.stringify(books));
   }
-
 
 //Display Book
 document.addEventListener("DOMContentLoaded", displayBooks);
@@ -112,9 +108,12 @@ document.querySelector("#book-form").addEventListener("submit", (e) => {
     
   }
 });
-const quote = document.querySelector('.quote')
 // Remove book
 document.querySelector('#book-list').addEventListener('click', (e) => {
   deleteBook(e.target);
   removeBook(e.target.parentElement.previousElementSibling.textContent);
 });
+//Delete Quote
+// document.querySelector('#delete').addEventListener('click', (e) => {
+//     deleteQuote(e.target)
+// })
