@@ -54,10 +54,8 @@ function displayBooks() {
     }
   }
 //delete quote
-  function deleteQuote(el) {
-    if(el.classList.contains('delete')){
-        el.parentElement.parentElement.remove()
-    }
+  function clearQuote() {
+    document.querySelector('#quote').value = ''
   }
 //store books
   function getBooks() {
@@ -113,7 +111,7 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
   deleteBook(e.target);
   removeBook(e.target.parentElement.previousElementSibling.textContent);
 });
-//Delete Quote
-// document.querySelector('#delete').addEventListener('click', (e) => {
-//     deleteQuote(e.target)
-// })
+//Delete Quote-no errors but...
+document.querySelector('.quote').addEventListener('click', () => {
+    clearQuote
+})
