@@ -1,6 +1,6 @@
-//openLibraryAPI url = "https://openlibrary.org/search.json"
+// openLibraryAPI url = "https://openlibrary.org/search.json"
 
-//search API & return first sentence (maybe add author and isbn)
+// search API & return first sentence (maybe add author and isbn)
 async function fetchBookInfo(title) {
     
     const response = await fetch(`https://openlibrary.org/search.json?title=${title}`);
@@ -13,6 +13,14 @@ async function fetchBookInfo(title) {
     let newQuote = document.createElement('p')
     newQuote.innerHTML = `${newText} <td><a href="#" id="delete" class="btn btn-danger btn-sm delete">X</a></td>`
     quote.appendChild(newQuote)
+    let deleteBtns = document.querySelectorAll('#delete')
+    for(let button of deleteBtns){
+        button.addEventListener('click', (e) => {
+            e.target.parentElement.parentElement.remove()
+
+        })
+    }
+
     //work on delete
    //work on catch error 
   }
@@ -23,11 +31,13 @@ function bookDetails(title, author, isbn) {
     this.author = author;
     this.isbn = isbn;
 }
+
 function displayBooks() {
     const books = getBooks();
     books.forEach((book) => addBookToList(book));
   }
-//add book to list
+
+// add book to list
   function addBookToList(book) {
     const list = document.querySelector("#book-list");
     const row = document.createElement("tr");
@@ -41,23 +51,22 @@ function displayBooks() {
 
     list.appendChild(row);
   }
-//clear the input field once book is added
+
+// clear the input field once book is added
   function clearInputs() {
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
     document.querySelector('#isbn').value = '';
   }
-//delete book
+
+// delete book
   function deleteBook(el) {
     if(el.classList.contains('delete')) {
       el.parentElement.parentElement.remove();
     }
   }
-//delete quote
-  function clearQuote() {
-    document.querySelector('#quote').value = ''
-  }
-//store books
+
+// book storage
   function getBooks() {
     let books;
     if(localStorage.getItem('books') === null) {
@@ -84,10 +93,11 @@ function displayBooks() {
     localStorage.setItem('books', JSON.stringify(books));
   }
 
-//Display Book
+// eventListeners
+// display Book
 document.addEventListener("DOMContentLoaded", displayBooks);
 
-//Add a Book
+// add a Book
 document.querySelector("#book-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const title = document.querySelector("#title").value;
@@ -96,7 +106,7 @@ document.querySelector("#book-form").addEventListener("submit", (e) => {
   const isbn = document.querySelector("#isbn").value;
 
     if (title === ""){
-    alert("Please fill in all fields");
+    alert("Please fill in title");
   } else {
     const book = new bookDetails(title, author, isbn);
     addBookToList(book);
@@ -106,12 +116,10 @@ document.querySelector("#book-form").addEventListener("submit", (e) => {
     
   }
 });
-// Remove book
+
+// remove book
 document.querySelector('#book-list').addEventListener('click', (e) => {
   deleteBook(e.target);
   removeBook(e.target.parentElement.previousElementSibling.textContent);
 });
-//Delete Quote-no errors but...
-document.querySelector('.quote').addEventListener('click', () => {
-    clearQuote
-})
+
