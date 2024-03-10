@@ -7,52 +7,63 @@
   <script src="https://kit.fontawesome.com/7d160ef6c5.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="main.js" defer></script>
-    <title>bookNook</title>
+    <title>2.0bookNook</title>
 </head>
 <body>
     <div class="container mt-4">
         <!-- title -->
         <h1 class="display-4 text-center">
           book <i class="fas fa-book-open-reader text-info"></i> Nook</h1>
+         <!--api form-->
+          <form id="api-form">
+            <div class="form-group">
+                <input type="text" id="apiInput" class="form-control" placeholder="Enter title">
+            </div>
+            <!--search button-->
+            <input type="submit" id="searchTitle" value="Search" class="btn btn-info btn-block">
+          </form>
+
+          <!--book form-->
           <form id="book-form">
-              <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" id="title" class="form-control">
+            
+            <div class="form-group">
+            <label for="title">Title</label>
+            <!--display API title-->
+            <input type="text" id="title" class="form-control">
+          </div>
+
+          <div class="form-group">
+              <label for="author">Author</label>
+              <!--display API author-->
+              <input type="text" id="author" class="form-control">
             </div>
 
-            <!-- <input type="submit" id="search" value="Search" class="btn btn-info btn-block"> -->
-
             <div class="form-group">
-                <label for="author">Author</label>
-                <input type="text" id="author" class="form-control">
-              </div>
+              <label for="isbn">ISBN#</label>
+              <!--display API isbn-->
+              <input type="text" id="isbn" class="form-control">
+            </div>
 
-              <div class="form-group">
-                <label for="isbn">ISBN#</label>
-                <input type="text" id="isbn" class="form-control">
-              </div>
+            <!--add button -->
+            <input type="submit" id="addBook" value="Add Book" class="btn btn-info btn-block">
 
-              <!-- submit/add button -->
-              <input type="submit" id="addBook" value="Add Book" class="btn btn-info btn-block">
+            <!-- display API first sentence with delete-->
+            <div id="quote" class="quote"></div>
 
-              <!-- display API info...move this?-->
-              <div id="quote" class="quote"></div>
-
-          </form>
-          <!-- list with delete button -->
-          <table class="table table-striped mt-5">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <!--display info from API-ISBN & Author???-->
-                <th id="listAuthor">Author</th>
-                <th id="listISBN">ISBN#</th>
-                <th></th>
-              </tr>
-              
-            </thead>
-            <tbody id="book-list"></tbody>
-          </table>
-      </div>
+        </form>
+        <!-- list with delete button -->
+        <table class="table table-striped mt-5">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>ISBN#</th>
+              <th></th>
+            </tr>
+            
+          </thead>
+          <tbody id="book-list"></tbody>
+        </table>
+    </div>
 </body>
 </html>
