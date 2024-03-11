@@ -8,40 +8,33 @@ async function fetchBookInfo(title) {
     let titleInput = document.querySelector('#title')
     let authorInput = document.querySelector('#author')
     let isbnInput = document.querySelector('#isbn')
-    let apiInput = document.querySelector('#apiInput')
-    // fetch  
-    const response = await fetch(`https://openlibrary.org/search.json?title=${title}`);
-    const bookInfo = await response.json();
-    // display title
-    let titleTitle = bookInfo.docs[0].title;
-    titleInput.value = `${titleTitle}`;
-    // display author
-    let titleAuthor = bookInfo.docs[0].author_name[0];
-    authorInput.value = `${titleAuthor}`;
-    // display isbn
-    let titleISBN = bookInfo.docs[0].isbn[0];
-    isbnInput.value = `${titleISBN}`;
-    //display first sentence
-    let newText = bookInfo.docs[0].first_sentence[0];
-    const quote = document.querySelector('.quote');
-    let newQuote = document.createElement('p');
-    newQuote.innerHTML = `${newText} <td><a href="#" id="delete" class="btn btn-danger btn-sm delete">X</a></td>`
-    quote.appendChild(newQuote)
-    // delete first sentence
-    let deleteBtns = document.querySelectorAll('#delete')
-    for(let button of deleteBtns){
-      button.addEventListener('click', (e) => {
-        e.target.parentElement.parentElement.remove()
-        
-      })
-    }
-    // clear apiInput
-    apiInput.value = ""
     
-   //work on catch error 
-  }
-  
-  
+    // fetch  
+    try {
+
+        const response = await fetch(`https://openlibrary.org/search.json?title=${title}`);
+        const bookInfo = await response.json();
+        // display title
+        let titleTitle = bookInfo.docs[0].title;
+        titleInput.value = `${titleTitle}`;
+        // display author
+        let titleAuthor = bookInfo.docs[0].author_name[0];
+        authorInput.value = `${titleAuthor}`;
+        // display isbn
+        let titleISBN = bookInfo.docs[0].isbn[0];
+        isbnInput.value = `${titleISBN}`;
+        //display first sentence
+        let newText = bookInfo.docs[0].first_sentence[0];
+        const quote = document.querySelector('.quote');
+        let newQuote = document.createElement('p');
+        newQuote.innerHTML = `"${newText}"`
+        quote.appendChild(newQuote)
+        
+    } catch (error) {
+       console.log(error) 
+    }
+   
+}
   
   // Create book
   function bookDetails(title, author, isbn) {
@@ -72,9 +65,10 @@ async function fetchBookInfo(title) {
   
   // clear the input field once book is added
   function clearInputs() {
-    document.querySelector('#title').value = '';
-    document.querySelector('#author').value = '';
-    document.querySelector('#isbn').value = '';
+      document.querySelector('#title').value = '';
+      document.querySelector('#author').value = '';
+      document.querySelector('#isbn').value = '';
+      document.querySelector('#apiInput').value = '';
   }
   
   // delete book
@@ -132,14 +126,17 @@ async function fetchBookInfo(title) {
   const author = document.querySelector("#author").value;
   const isbn = document.querySelector("#isbn").value;
   
-    if (title === ""){
-    alert("Please fill in title");
-  } else {
-    const book = new bookDetails(title, author, isbn);
-    addBookToList(book);
-    addBook(book);
-    clearInputs();
-  }
+  
+  if (title === ""){
+      alert("Please fill in title");
+    } else {
+        const book = new bookDetails(title, author, isbn);
+        addBookToList(book);
+        addBook(book);
+        clearInputs();
+        document.querySelector('#quote').innerHTML = '';
+    
+    }
   });
   
   // remove book

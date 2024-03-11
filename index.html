@@ -7,7 +7,7 @@
   <script src="https://kit.fontawesome.com/7d160ef6c5.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="main.js" defer></script>
-    <title>2.0bookNook</title>
+    <title>bookNook</title>
 </head>
 <body>
     <div class="container mt-4">
@@ -25,12 +25,16 @@
 
           <!--book form-->
           <form id="book-form">
-            
+
             <div class="form-group">
             <label for="title">Title</label>
             <!--display API title-->
             <input type="text" id="title" class="form-control">
           </div>
+
+           <!-- display API first sentence with delete-->
+           <div id="quote" class="quote"></div>
+
 
           <div class="form-group">
               <label for="author">Author</label>
@@ -48,7 +52,7 @@
             <input type="submit" id="addBook" value="Add Book" class="btn btn-info btn-block">
 
             <!-- display API first sentence with delete-->
-            <div id="quote" class="quote"></div>
+            <!-- <div id="quote" class="quote"></div> -->
 
         </form>
         <!-- list with delete button -->
