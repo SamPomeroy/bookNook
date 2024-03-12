@@ -1,5 +1,5 @@
 // openLibraryAPI url = "https://openlibrary.org/search.json"
-
+// openLibraryCovers url = "https://covers.openlibrary.org/b/isbn/0385472579-S.jpg"
 
 
 
